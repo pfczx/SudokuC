@@ -14,10 +14,11 @@ void timeout_handler(int sig) {
     timed_out = 1;
 }
 
-// checking by 50x randomly filled board if all solution numbers(nonvisible cells) are the same
-bool is_one_solution(int **board, bool **visibility, int size, time_t started_t) {
+// checking by 500x randomly filled board if all solution numbers(nonvisible cells) are the same
+bool is_one_solution(int **board, bool **visibility, int size,int hints, time_t started_t) {
     
     int attempts = 3000;
+    int hidden_cells = size * size - hints;
     int **temp_board = (int **) malloc(size * sizeof(int *));
     for (int i = 0; i < size; i++) {
         temp_board[i] = (int *) malloc(size * sizeof(int));
@@ -25,7 +26,7 @@ bool is_one_solution(int **board, bool **visibility, int size, time_t started_t)
 
     int **solutions = (int **) malloc(attempts * sizeof(int *));
     for (int i = 0; i < attempts; i++) {
-        solutions[i] = (int *) malloc((size *size) * sizeof(int));
+        solutions[i] = (int *) malloc((hidden_cells) * sizeof(int));
     }
 
     for (int loop = 0; loop < attempts; loop++) {
@@ -61,7 +62,7 @@ bool is_one_solution(int **board, bool **visibility, int size, time_t started_t)
         
     }
     //checking if all solutions are the same
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < hidden_cells; i++) {
         for (int j = 0; j < attempts; j++) {
             if (solutions[0][i] != solutions[j][i]) {
                 return false;
@@ -74,6 +75,7 @@ bool is_one_solution(int **board, bool **visibility, int size, time_t started_t)
     
 
 }
+
 //checking vertical, horizontal and subgrid sqrt(size) coz of sudoku rules
 bool check_new_number(int **board, int row, int col, int num, int size) {
     //alarm needed for is_one_solution function 
@@ -209,9 +211,10 @@ SudokuBoard* Sudokuboard_init(int size, int hints)  {
 
     do {
         set_visibility(visibility, size, hints);
+        printf("Setting visibility\n");
         
 
-    }while (!is_one_solution(board,visibility,size,time(NULL)));
+    }while (!is_one_solution(board,visibility,size,hints,time(NULL)));
 
     
     

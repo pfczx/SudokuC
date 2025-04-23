@@ -22,6 +22,7 @@ for (int i = 0; i < size; i++) {
     printf("\n");
 }
 }
+
 void print_complete_board(int **board, bool **visibility, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -41,7 +42,7 @@ int main() {
     int size = 16;
     // for 16 - 80
     // for 9 - 20  
-    int hints = 80; 
+    int hints = 60; 
 
     SudokuBoard *sudoku = Sudokuboard_init(size, hints);
 

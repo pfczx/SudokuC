@@ -29,6 +29,10 @@ Here's how it works:
 
 ---
 
+https://github.com/user-attachments/assets/0e3058f8-e26a-4be4-9826-1930a2542ca5
+
+---
+
 ## 🔨 Building 
 src
 ```bash

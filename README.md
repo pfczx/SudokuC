@@ -1,1 +1,47 @@
-# SudokuC
+# 🧩 SudokuC
+
+**SudokuC** is a terminal-based Sudoku game written in C, designed for a simple puzzle-solving. It supports different board sizes, autosaves progress after every move.
+
+---
+
+## ✨ Features
+
+- ✅ Play Sudoku in your terminal with a clean menu-driven interface.
+- 🔄 Auto-saves game progress to a local file (`autosave.txt`) after each move.
+- 💡 Custom board generation with selectable size and number of hints:
+  - Supported sizes: **4x4**, **9x9**, and **16x16**.
+- 🔍 Move validation with real-time win condition checks.
+- ♻️ Regenerate the board at any time.
+- 🧪 Built-in input validation to prevent invalid entries.
+
+---
+
+## 🧠 Board Generation: Recursive Backtracking
+
+The Sudoku board is generated using a **recursive backtracking algorithm**, a common technique in constraint satisfaction problems like Sudoku.
+
+Here's how it works:
+1. The algorithm fills the board one cell at a time.
+2. For each cell, it attempts to place a number that doesn't violate Sudoku rules.
+3. If no valid number can be placed, it backtracks to the previous cell and tries a different value.
+4. This continues recursively until the entire board is filled with a valid solution.
+5. Then with another backtracking functions algorithm will be removing cells one by one ensuring sudoku has only one solution
+
+---
+
+## 🔨 Building
+```bash
+git clone https://github.com/pfczx/SudokuC.git
+cd SudokuC
+```
+```bash
+cd src
+gcc -c main.c board.c utility.c autosave.c
+gcc main.o board.o utility.o autosave.o -o ../build/sudoku -lm
+```
+```bash
+chmod +x sudoku
+cd ../build
+./sudoku
+
+```

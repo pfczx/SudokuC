@@ -29,19 +29,16 @@ Here's how it works:
 
 ---
 
-## 🔨 Building
+## 🔨 Building 
+src
 ```bash
-git clone https://github.com/pfczx/SudokuC.git
-cd SudokuC
+gcc -c main.c -o ../build/main.o
+gcc -c board.c -o ../build/board.o
+gcc -c utility.c -o ../build/utility.o
+gcc -c autosave.c -o ../build/autosave.o
 ```
+build
 ```bash
-cd src
-gcc -c main.c board.c utility.c autosave.c
-gcc main.o board.o utility.o autosave.o -o ../build/sudoku -lm
+gcc main.o board.o utility.o autosave.o -o sudoku -lm 
 ```
-```bash
-chmod +x sudoku
-cd ../build
-./sudoku
 
-```

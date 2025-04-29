@@ -10,6 +10,20 @@ void clear_buffer() {
 void print_board(int **board, int size) {
 
     int subgrid_size = (int)sqrt(size); 
+    int line_length;
+    switch(size) {
+        case 4:
+            line_length = 11;
+            break;
+        case 9:
+            line_length = 20;
+            break;
+        case 16:
+            line_length = 32;
+            break;
+        default:
+            line_length = 0;
+    }
     //col index
     printf("       ");
     for (int i = 0; i < size; i++) {
@@ -22,11 +36,11 @@ void print_board(int **board, int size) {
         }
     }
     printf("\n");
-    for (int i = 0; i < (size * 2) + size % subgrid_size; i++) {
+    for (int i = 0; i < line_length; i++) {
         printf("--");
     }
     printf("\n");
-    
+                     
     for (int i = 0; i < size; i++) {
         //row index
         printf("%2d", i + 1);
@@ -44,7 +58,7 @@ void print_board(int **board, int size) {
 
         
         if ((i + 1) % subgrid_size == 0 && i != size - 1) {
-            for (int j = 0; j < (size * 2)+size%subgrid_size; j++) {
+            for (int j = 0; j < line_length; j++) {
                 printf("--");
             }
             printf("\n");

@@ -43,10 +43,6 @@ void set_one_solution(int **board,bool **visibility,int **solutions,int size,int
     
     }
 }
-    
-
-
-    
  
 }
 void count_solutions(int **board,bool **visibility,int **solutions,int size,int row,int col,int *solutions_counter,int solution_limit) {
@@ -109,6 +105,7 @@ bool check_new_number(int **board, int row, int col, int num, int size) {
 
     return true;
 }
+
 //filling the board with random numbers(1-size), recursive,reset if time is up(0.2s) 
 void fill_board(int **board,bool **visibility, int size, int row, int col,time_t started_t) {
 
@@ -154,10 +151,6 @@ void fill_board(int **board,bool **visibility, int size, int row, int col,time_t
     }
 }
 
-
-                  
-             
-
 SudokuBoard* Sudokuboard_init(int size, int hints)  {
 
     bool **visibility = (bool **) malloc(size * sizeof(bool *));
@@ -174,11 +167,17 @@ SudokuBoard* Sudokuboard_init(int size, int hints)  {
     int **board = (int **) malloc(size * sizeof(int *));
     for (int i = 0; i < size; i++) {
         board[i] = (int *) malloc(size * sizeof(int));
+        for (int j = 0; j < size; j++) {
+            board[i][j] = 0;
+        }
     }
 
     int **solutions = (int **) malloc(size * sizeof(int *));
     for (int i = 0; i < size; i++) {
         solutions[i] = (int *) malloc(size * sizeof(int));
+        for (int j = 0; j < size; j++) {
+            solutions[i][j] = 0;
+        }
     }
 
 
@@ -187,15 +186,13 @@ SudokuBoard* Sudokuboard_init(int size, int hints)  {
     int hidden_limit = size * size - hints;
     set_one_solution(board,visibility,solutions,size,hints,0,hidden_limit);
     
-    
-    
-                      
     SudokuBoard *sudoku_board = (SudokuBoard *) malloc(sizeof(SudokuBoard));
 
     sudoku_board->size = size;
     sudoku_board->board = board;
     sudoku_board->visibility = visibility;
-    sudoku_board->solutions = solutions;
+    sudoku_board->solutions = solutions; 
+
     return sudoku_board;
 
 

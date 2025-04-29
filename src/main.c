@@ -1,5 +1,6 @@
 #include "board.h"
 #include "utility.h"
+#include "autosave.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -9,10 +10,21 @@ int main() {
     srand(time(NULL));
 
     SudokuBoard *sudoku = NULL;
-    bool is_board_generated = false;
-    bool is_board_saved = false;
+    bool board_exists = false;
     bool is_solved = false;
 
+    create_autosave_file();
+    sudoku = load_sudoku();
+    
+    // Check if board is loaded
+    if (sudoku->size == 4 || sudoku->size == 9 || sudoku->size == 16) {
+        system("clear");
+        printf("Board loaded successfully.\n");
+        sleep(1);
+        system("clear");
+        board_exists = true;
+    }
+        
     while(1){
         
         system("clear");
@@ -21,7 +33,7 @@ int main() {
         printf(" | (___  | |  | || |  | || | | || ' / | || |\n");
         printf("  \\___ \\ | |  | || |  | || | | ||  <  | || |\n");
         printf("  ____) || |__| || |__| || |_| || . \\ | || |\n");
-        printf(" |_____/  \\____/ |_____/ |____/ |_|\_\\ |____|\n");
+        printf(" |_____/  \\____/ |_____/ |____/ |_|\\_\\|____|\n");
         printf("\n        SUDOKU GAME by pfczx\n\n");
         printf("\n");
         printf("MENU:\n");
@@ -40,7 +52,7 @@ int main() {
 
         switch (choice) {
             case 1:
-                if (!is_board_generated && !is_board_saved) {
+                if (!board_exists) {
                     printf("Please generate a board first.\n");
                     sleep(1);
                     system("clear");
@@ -66,7 +78,7 @@ int main() {
                     int minutes = elapsed_time / 60;
                     printf("Elapsed time: %d minutes and %d seconds\n", minutes, elapsed_time % 60);
                     printf("Moves count: %d\n", moves_count);
-                    
+
                     //move
                     int row, col, num;
                     printf("\n");
@@ -92,6 +104,7 @@ int main() {
                         sudoku->board[row][col] = num;
                         is_solved = check_sudoku_state(sudoku->board, sudoku->visibility, sudoku->solutions, sudoku->size);
                         moves_count++;
+                        save_sudoku(sudoku);
                     }
                     else {
                         printf("Invalid move. Please try again.\n");
@@ -105,7 +118,7 @@ int main() {
                 break;
             case 2:
                 //clearning previous board
-                if (is_board_generated || is_board_saved) {
+                if (board_exists) {
                     system("clear");
                     printf("Clearnig previous board.\n");
                     clear_sudoku(sudoku);
@@ -113,7 +126,7 @@ int main() {
                     sleep(1);
                     printf("Done\n");
                     
-                    
+                             
                 }
                 system("clear");
 
@@ -121,7 +134,7 @@ int main() {
                     clear_buffer();
                     printf("Enter board size (4,9,16): ");
                     scanf("%d", &size);
-                    printf("Enter number of hints (recommended 20 for 9x9, 125 for 16x16 or more): ");
+                    printf("Enter number of hints (minimal ammount 24 for 9x9, 125 for 16x16): ");
                     scanf("%d", &hints);
                     system("clear");
 
@@ -134,17 +147,19 @@ int main() {
                 system("clear");
                 sudoku = Sudokuboard_init(size, hints);
                 clear_buffer();
-                is_board_generated = true;
+                board_exists = true;
+                is_solved = false;
                 printf("Board generated successfully, go to play and GOOD LUCK! :).\n");
                 print_board(sudoku->board, sudoku->size);
-                sleep(1);
+                sleep(2);
                 system("clear");
                 break;
             case 3:
                 system("clear");
                 printf("Game Info:\n");
                 printf("--This is a simple Sudoku game.\n");                 
-                printf("--Your current board will be autosaved after every move and load if you wish to come back :).\n");
+                printf("--Your current board will be autosaved after every move and load when starting script if you wish to come back :).\n");
+                printf("--Save file will be located in the game dir (autosave.txt), do not rename it.\n");
                 printf("--You can generate a new board at any time.\n");
                 printf("--Erors will be shown if you try to make an invalid move but try to avoid pressing ENTER too many times.\n");
                 printf("--The game is created by pfczx.\n");
@@ -164,7 +179,6 @@ int main() {
                 break;
                 
         }
-
 
     }
     return 0;

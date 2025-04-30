@@ -25,7 +25,7 @@ Here's how it works:
 2. For each cell, it attempts to place a number that doesn't violate Sudoku rules.
 3. If no valid number can be placed, it backtracks to the previous cell and tries a different value.
 4. This continues recursively until the entire board is filled with a valid solution.
-5. Then with another backtracking functions algorithm will be removing cells one by one ensuring sudoku has only one solution
+5. Then another backtracking algorithm will be removing cells one by one ensuring sudoku has only one solution
 
 ---
 

@@ -5,11 +5,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include "solver.h"
 
 int main() {
     srand(time(NULL));
 
     SudokuBoard *sudoku = NULL;
+    
     bool board_exists = false;
     bool is_solved = false;
 
@@ -40,7 +42,8 @@ int main() {
         printf("1. Play\n");
         printf("2. Generate/Regenerate Board\n");
         printf("3. Game Info\n");
-        printf("4. Exit\n");
+        printf("4. Solver\n");
+        printf("5. Exit\n");
         printf("\n");
         printf("Enter your choice: ");
 
@@ -168,8 +171,24 @@ int main() {
                 getchar();
                 break;
             case 4:
+                system("clear");
+                if (!board_exists) {
+                    printf("Please generate a board first.\n");
+                    sleep(1);
+                    system("clear");
+                    clear_buffer();
+                    break;
+                }
+                printf("Starting solver...\n");
+                solver(sudoku);
+                system("clear");
+            break;
+            case 5:
                 exit(0);
                 break;
+
+              
+                
             default:
                 system("clear");
                 printf("Wrong input ;(.\n");

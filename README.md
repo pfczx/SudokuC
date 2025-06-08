@@ -50,6 +50,10 @@ build
 gcc main.o board.o utility.o autosave.o solver.o genetic_solver.o -o sudoku -lm 
 ```
 ---
-![ac](https://github.com/user-attachments/assets/4a2dbf26-73a5-4808-a13b-aaf432c1580a)
+
+
+https://github.com/user-attachments/assets/a7c0c596-f53e-4014-934c-1a989192d64e
+
+
 
 

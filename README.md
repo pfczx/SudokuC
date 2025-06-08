@@ -13,6 +13,7 @@
 - 🔍 Move validation with real-time win condition checks.
 - ♻️ Regenerate the board at any time.
 - 🧪 Built-in input validation to prevent invalid entries.
+- 💻 Genetic algorithm and Simulated Annealing for solving sudoku for you.
 
 ---
 
@@ -40,10 +41,13 @@ gcc -c main.c -o ../build/main.o
 gcc -c board.c -o ../build/board.o
 gcc -c utility.c -o ../build/utility.o
 gcc -c autosave.c -o ../build/autosave.o
+gcc -c solver.c -o ../build/autosave.o
+gcc -c genetic_solver.c -o ../build/autosave.o
+
 ```
 build
 ```bash
-gcc main.o board.o utility.o autosave.o -o sudoku -lm 
+gcc main.o board.o utility.o autosave.o solver.o genetic_solver.o -o sudoku -lm 
 ```
 ---
 ![ac](https://github.com/user-attachments/assets/4a2dbf26-73a5-4808-a13b-aaf432c1580a)

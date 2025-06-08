@@ -6,6 +6,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "solver.h"
+#include "genetic_solver.h"
 
 int main() {
     srand(time(NULL));
@@ -42,8 +43,9 @@ int main() {
         printf("1. Play\n");
         printf("2. Generate/Regenerate Board\n");
         printf("3. Game Info\n");
-        printf("4. Solver\n");
-        printf("5. Exit\n");
+        printf("4. Solver - simulated annealing\n");
+        printf("5. Solver - genetic algorithm\n");
+        printf("6. Exit\n");
         printf("\n");
         printf("Enter your choice: ");
 
@@ -179,11 +181,30 @@ int main() {
                     clear_buffer();
                     break;
                 }
+
+            
                 printf("Starting solver...\n");
                 solver(sudoku);
+                is_solved = check_sudoku_state(sudoku->board, sudoku->visibility, sudoku->solutions, sudoku->size); 
                 system("clear");
             break;
             case 5:
+                system("clear");
+                if (!board_exists) {
+                    printf("Please generate a board first.\n");
+                    sleep(1);
+                    system("clear");
+                    clear_buffer();
+                    break;
+                }
+                
+                printf("Starting genetic solver...\n");
+                genetic_solver(sudoku);
+                is_solved = check_sudoku_state(sudoku->board, sudoku->visibility, sudoku->solutions, sudoku->size);
+                sleep(1);
+                system("clear");
+                break;
+            case 6:
                 exit(0);
                 break;
 

@@ -37,6 +37,15 @@ bool check_number(int **board, int row, int col, int num, int size) {
 }
 void init_for_solver(SudokuBoard *sudoku) {
 
+    for(int i = 0; i < sudoku->size; i++) {
+        for (int j = 0; j < sudoku->size; j++) {
+            if (sudoku->visibility[i][j] == 0) {
+                sudoku->board[i][j] = 0; 
+                }
+
+        }
+    }
+
     int grid_size = sqrt(sudoku->size);
     
     //filling board random numbers with grid checking
@@ -171,6 +180,7 @@ void solver(SudokuBoard *sudoku){
             break;
         }
         temperature *= cooling_rate;
+        printf("Current cost: %d, Temperature: %.5f\n", cost, temperature);
         
         
     }

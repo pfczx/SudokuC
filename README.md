@@ -30,7 +30,7 @@ Here's how it works:
 
 ---
 
-https://github.com/user-attachments/assets/0e3058f8-e26a-4be4-9826-1930a2542ca5
+https://github.com/user-attachments/assets/a7c0c596-f53e-4014-934c-1a989192d64e
 
 ---
 
@@ -52,7 +52,6 @@ gcc main.o board.o utility.o autosave.o solver.o genetic_solver.o -o sudoku -lm
 ---
 
 
-https://github.com/user-attachments/assets/a7c0c596-f53e-4014-934c-1a989192d64e
 
 
 

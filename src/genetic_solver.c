@@ -128,7 +128,7 @@ void genetic_solver(SudokuBoard *sudoku) {
             return;
         }
 
-        //reset worse half population if stagnation occurs
+        //reset worse half population if stagnation occurs, mutate better half
         if (generation > 0 && population[0].cost == population[1].cost) {
             stagnation_count++;
             if (stagnation_count >= STAGNATION_LIMIT) {

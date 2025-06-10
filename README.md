@@ -50,6 +50,8 @@ build
 gcc main.o board.o utility.o autosave.o solver.o genetic_solver.o -o sudoku -lm 
 ```
 ---
+![ac](https://github.com/user-attachments/assets/4a2dbf26-73a5-4808-a13b-aaf432c1580a)
+
 
 
 
